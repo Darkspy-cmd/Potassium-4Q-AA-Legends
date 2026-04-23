@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>4 Pics 1 Word Story Game</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        #topBar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 10px 20px;
+            background: #222;
+            color: white;
+            font-weight: bold;
+            border-bottom-left-radius: 10px;
+        }
+
+        .container {
+            margin-top: 80px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .box {
+            background: white;
+            width: 480px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        .section {
+            text-align: left;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 8px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        input {
+            padding: 8px;
+            margin-top: 10px;
+            width: 70%;
+        }
+
+        .locked {
+            background-color: gray;
+        }
+
+        #errorMsg {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="topBar">Score: 0</div>
+
+    <div class="container">
+
+        <div id="home" class="box">
+
+            <h1>4 Pictures 1 Word</h1>
+
+            <div class="section">
+                <h3>Description:</h3>
+                <p>
+                    This is a fun word puzzle game where you guess the missing word in a story
+                    using four pictures as clues.
+                </p>
+
+                <h3>Tutorial:</h3>
+                <p>
+                    • Read the story.<br><br>
+                    • Look at the four pictures for hints.<br><br>
+                    • Type your answer in the box.<br><br>
+                    • Finish levels to unlock harder ones.
+                </p>
+            </div>
+
+            <input type="text" id="username" placeholder="Enter username">
+            <p id="errorMsg"></p>
+
+            <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <div id="menu" class="box hidden">
+
+            <h2>Select Difficulty</h2>
+
+            <button onclick="startLevel('easy')">Easy</button>
+            <button id="mediumBtn" class="locked" disabled onclick="startLevel('medium')">Medium</button>
+            <button id="hardBtn" class="locked" disabled onclick="startLevel('hard')">Hard</button>
+        </div>
+
+        <div id="game" class="box hidden">
+
+            <h2 id="levelTitle"></h2>
+
+            <p id="storyText"></p>
+
+            <div class="grid">
+                <img id="pic1">
+                <img id="pic2">
+                <img id="pic3">
+                <img id="pic4">
+            </div>
+
+            <input type="text" id="userAnswer" placeholder="Enter your guess">
+            <br>
+
+            <button onclick="checkAnswer()">Submit</button>
+            <button id="nextBtn" class="hidden" onclick="nextLevel()">Next Level</button>
+
+            <p id="message"></p>
+
+            <button onclick="goBack()">Back to Menu</button>
+
+            <div id="leaderboard"></div>
+            <div id="lastScore"></div>
+            <button onclick="resetLeaderboard()">Reset Leaderboard</button>
+
+
+            <button onclick="saveUsername()">Save Username</button>
+            <p id="saveMsg" style="color: green; font-size: 14px;"></p>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
